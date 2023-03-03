@@ -17,6 +17,26 @@ module.exports = {
   },
 
 
+  async updateUser({ body, params }, res) {
+    let userToUpdate = { email: body.email }
+
+    if( body.password?.length ){
+      const salt = await bcrypt.genSalt(10)
+      const password = await bcrypt.hash(body.password, salt)
+      userToUpdate = {...userToUpdate, password: password }
+    }
+
+    const user = await User.updateOne(
+      { _id: params.id },
+      userToUpdate,
+      { new: true }
+    );
+
+    if (!user) return res.status(400).json({ message: 'Unable to update user' });
+    res.status(200).json({ _id: user._id, email: user.email });
+  },
+
+
   async authUser({ body }, res) {
 
     // Find the user by the email address
@@ -50,7 +70,6 @@ module.exports = {
     const user = await User.findById(isVerified.id)
     if( !user ) return res.status(401).json({msg: "authorized"})
     
-    console.log("found user: " + user)
     return res.status(200).json({ _id: user._id, email: user.email})
   }
 

@@ -1,8 +1,5 @@
-import { useState } from "react"
 
-const Header = () => {
-  const [ showDropDown, setShowDropDown ] = useState(false)
-
+const Header = ({user}) => {
   return (
     <header className="px-2 pb-0 mb-0" style={{ borderBottom: "1px solid #333" }}>
       <nav className="navbar navbar-dark navbar-expand-md bg-body-secondary" data-bs-theme="dark">
@@ -16,12 +13,27 @@ const Header = () => {
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="/">Home</a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/signup">Signup Page</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/login">Login Page</a>
-              </li>
+              
+              { !user ? (
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/signup">Signup</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/login">Login</a>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/profile">Profile</a>
+                  </li>
+                  <li className="nav-item">
+                    <a className="nav-link" href="/logout">Logout</a>
+                  </li>
+                </>
+              )}
+              
             </ul>
           </div>
         </div>

@@ -1,15 +1,14 @@
-import { useState, useEffect } from "react"
-import { useUser } from "../utils/UserContext"
 
-const HomePage = (props) => {
-  const userCtx = useUser()
+const HomePage = ({user}) => {
 
   return (
     <>
       <h1>Home Page</h1>
 
-      { userCtx.user !== null && userCtx.user !== undefined && (
-        <p>This user is logged in.</p>
+      { !user ? (
+        <p>The user is not logged in.</p>
+      ) : (
+        <p>The user is logged in.</p>
       )}
     </>
   )
