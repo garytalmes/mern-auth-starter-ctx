@@ -9,11 +9,13 @@ module.exports = {
     const salt = await bcrypt.genSalt(10)
     const password = await bcrypt.hash(body.password, salt)
 
-    const userToInsert = {email: body.email, password: password }
-    const user = await User.create(userToInsert);
-
-    if (!user) return res.status(400).json({ message: 'Unable to create user' });
-    res.status(200).json({ _id: user._id, email: user.email });
+    try {
+      const userToInsert = {email: body.email, password: password }
+      const user = await User.create(userToInsert);
+      res.status(200).json({ _id: user._id, email: user.email });
+    } catch(err){
+      return res.status(400).json({ message: 'Unable to create user' })
+    }
   },
 
 
@@ -68,7 +70,7 @@ module.exports = {
     if( !isVerified ) return res.status(401).json({msg: "un-authorized"})
 
     const user = await User.findById(isVerified.id)
-    if( !user ) return res.status(401).json({msg: "authorized"})
+    if( !user ) return res.status(401).json({msg: "un-authorized"})
     
     return res.status(200).json({ _id: user._id, email: user.email})
   }
