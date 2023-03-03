@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
+import { useAppCtx } from "../utils/AppContext"
 
-const ProfilePage = ({user}) => {
+const ProfilePage = () => {
+  const { user } = useAppCtx()
+
   const [ formData, setFormData ] = useState({ email: "", password: "" })
   const [ updateResult, setUpdateResult ] = useState("")
 

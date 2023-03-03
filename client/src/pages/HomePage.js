@@ -1,6 +1,8 @@
+import { useAppCtx } from "../utils/AppContext"
 
-const HomePage = ({user}) => {
-
+const HomePage = () => {
+  const { user } = useAppCtx()
+  
   return (
     <>
       <h1>Home Page</h1>

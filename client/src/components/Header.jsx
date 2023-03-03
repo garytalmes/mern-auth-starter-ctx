@@ -1,5 +1,8 @@
+import { useAppCtx } from "../utils/AppContext"
 
-const Header = ({user}) => {
+const Header = () => {
+  const { user } = useAppCtx()
+  
   return (
     <header className="px-2 pb-0 mb-0" style={{ borderBottom: "1px solid #333" }}>
       <nav className="navbar navbar-dark navbar-expand-md bg-body-secondary" data-bs-theme="dark">
