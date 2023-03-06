@@ -1,6 +1,6 @@
 # MERN Auth Starter
 
-This is a small MERN authentication package for my students. Recently updated to incorporate React v18.
+This is a small MERN authentication package for my students. Recently updated to incorporate React v18. This version also includes integration with React Context.
 
 ## The Authentication Process
 
